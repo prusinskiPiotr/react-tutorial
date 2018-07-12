@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Guest from './Guest';
+
 const GuestList = props => 
 <ul>
     {props.guests.map((guests, index) =>
-    <li key={index}>
-        <span>{guests.name}</span>
-        <label>
-            <input type="checkbox" checked={guests.isConfirmed}/> Confirmed
-        </label>
-        <button>edit</button>
-        <button>remove</button>
-    </li>
+        <Guest key={index} name={guests.name} isConfirmed={guests.isConfirmed}/>
     )}
 </ul>;
 
