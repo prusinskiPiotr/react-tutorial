@@ -45,6 +45,14 @@ class App extends Component {
   toggleEditingAt = index =>
     this.toggleGuestPropertyAt("isEditing", index);
 
+  removeGuestAt = index =>
+    this.setState({
+      guests: [
+        ...this.state.guests.slice(0, index),
+        ...this.state.guests.slice(index + 1)
+      ]
+    })
+
   setNameAt = (name, indexToChange) => 
     this.setState({
       guests: this.state.guests.map((guest, index) => {
@@ -66,14 +74,14 @@ class App extends Component {
 
   newGuestSubmitHandler = e => {
     e.preventDefault();
-    e.setState({
+    this.setState({
       guests: [
         {
           name: this.state.pendingGuest,
           isConfirmed: false,
           isEditing: false
         },
-        ...this.state.guest
+        ...this.state.guests
       ],
       pendingGuest: ''
     })
@@ -129,6 +137,7 @@ class App extends Component {
           guests={this.state.guests}
           toggleConfirmationAt={this.toggleConfirmationAt}
           toggleEditingAt={this.toggleEditingAt}
+          removeGuestAt={this.removeGuestAt}
           setNameAt={this.setNameAt}
           isFiltered={this.state.isFiltered}
         />
