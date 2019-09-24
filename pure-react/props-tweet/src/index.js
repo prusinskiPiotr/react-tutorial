@@ -13,8 +13,8 @@ function Tweet({ tweet }){
                 <Message text={tweet.message}/>
                 <div className="buttons">
                     <ReplyButton/>
-                    <RetweetButton/>
-                    <LikeButton/>
+                    <RetweetButton count={tweet.retweets}/>
+                    <LikeButton count={tweet.likes}/>
                     <MoreOptionsButton/>
                 </div>
             </div>
@@ -56,16 +56,52 @@ const Time = ({time}) => {
 }
 const ReplyButton = () => (
     <i className="fa fa-reply reply-button"/>
-);
-const RetweetButton = () => (
-    <i className="fa fa-retweet retweet-button"/>
-);
-const LikeButton = () => (
-    <i className="fa fa-heart like-button"/>
+    );
+function getRetweetCount(count){
+    if(count > 0) {
+        return (
+            <span className="retweet-count">
+                {count}
+            </span>
+        );
+    } else {
+        return null;
+    }
+}
+// const RetweetButton = ({ count }) => (
+//     <span className="retweet-button">
+//         <i className="fa fa-retweet"/>
+//         {getRetweetCount( count )}
+//     </span>
+// );
+const LikeButton = ({ count }) => (
+    <span className="like-button">
+        <i className="fa fa-heart"/>
+        <span className="like-count">
+            {count ? count : null}
+        </span>
+    </span>
 );
 const MoreOptionsButton = () => (
     <i className="fa fa-ellipsis-h more-options-button"/>
 );
+function Count({ count }){
+    if(count > 0){
+        return (
+            <span className="retweet-count">
+                {count}
+            </span>
+        );
+    } else {
+        return null;
+    }
+}
+const RetweetButton = ({ count }) => (
+    <span className="retweet-button">
+        <i className="fa fa-retweet"/>
+        <Count count={count}/>
+    </span>
+)
 const testTweet = {
     message: "Something about cats.",
     gravatar: "xyz",
@@ -74,7 +110,7 @@ const testTweet = {
         name: "IAMA Cat Person"
     },
     likes: 2,
-    retweets: 0,
+    retweets: 17,
     timestamp: "2016-07-30 21:24:37"
 }
 ReactDOM.render(<Tweet tweet={testTweet}/>,
