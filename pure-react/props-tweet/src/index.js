@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment'
@@ -56,18 +57,18 @@ const Time = ({time}) => {
 }
 const ReplyButton = () => (
     <i className="fa fa-reply reply-button"/>
-    );
-function getRetweetCount(count){
-    if(count > 0) {
-        return (
-            <span className="retweet-count">
-                {count}
-            </span>
-        );
-    } else {
-        return null;
-    }
-}
+);
+// function getRetweetCount(count){
+//     if(count > 0) {
+//         return (
+//             <span className="retweet-count">
+//                 {count}
+//             </span>
+//         );
+//     } else {
+//         return null;
+//     }
+// }
 // const RetweetButton = ({ count }) => (
 //     <span className="retweet-button">
 //         <i className="fa fa-retweet"/>
@@ -82,6 +83,7 @@ const LikeButton = ({ count }) => (
         </span>
     </span>
 );
+
 const MoreOptionsButton = () => (
     <i className="fa fa-ellipsis-h more-options-button"/>
 );
@@ -113,5 +115,28 @@ const testTweet = {
     retweets: 17,
     timestamp: "2016-07-30 21:24:37"
 }
+
+LikeButton.propTypes = {
+    count: PropTypes.number
+};
+RetweetButton.propTypes = {
+    count: PropTypes.number
+};
+Message.propTypes = {
+    text: PropTypes.string
+};
+Time.propTypes = {
+    time: PropTypes.string
+};
+Author.propTypes = {
+    author: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        handle: PropTypes.string.isRequired
+    }).isRequired
+};
+Avatar.propTypes = {
+    hash: PropTypes.string
+}
 ReactDOM.render(<Tweet tweet={testTweet}/>,
     document.querySelector('#root'));
+
