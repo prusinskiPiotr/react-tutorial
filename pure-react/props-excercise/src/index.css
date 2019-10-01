@@ -1,0 +1,17 @@
+body{
+    font-size: 12px;
+}
+.envelope{
+    margin: 10px;
+    border: 1px solid lightgrey;
+    padding: 20px;
+    width: 700px;
+    height: 300px;
+}
+.to-person{
+    margin-top: 150px;
+    text-align: center;
+}
+.from-person{
+    font-size: 20px !important;
+}
