@@ -11,6 +11,12 @@ function IconButton({ children }) {
     );
 }
 
+function NavItem({ children }){
+    return (
+        <a>{children}</a>
+    );
+}
+
 function Nav({ children }){
     let items = React.Children.toArray(children);
     for(let i = items.length - 1; i >= 1; i--){
@@ -18,7 +24,7 @@ function Nav({ children }){
     }
 
     return(
-        <div><i class="fa fa-address-book" aria-hidden="true"></i></div>
+        <div>{items}</div>
     )
 }
 
@@ -34,8 +40,13 @@ function ErrorBox({ children }){
 }
 
 ReactDOM.render(
-    <ErrorBox>
-        Something has gone wrong
-    </ErrorBox>,
+    // <ErrorBox>
+    //     Something has gone wrong
+    // </ErrorBox>,
+    <Nav>
+        <NavItem>Home</NavItem>
+        <NavItem>About</NavItem>
+        <NavItem>Contact</NavItem>
+    </Nav>,
     document.getElementById('root')
     );
