@@ -39,14 +39,39 @@ function ErrorBox({ children }){
     )
 }
 
+function FirstChildOnly({ children }) {
+    return(
+        <div>
+        {React.Children.map(children, (child, i) => {
+          if (i > 0) return
+          return child
+        })}
+      </div>
+    )
+}
+
+function LastChildOnly({ children }) {
+    const totalChildren = React.Children.count(children)
+    return(
+        <div>
+            {React.Children.map(children, (child, i) => {
+                if (i < totalChildren - 1) return 
+                return child
+            })}
+        </div>
+    )
+}
+
 ReactDOM.render(
     // <ErrorBox>
     //     Something has gone wrong
     // </ErrorBox>,
-    <Nav>
+    <LastChildOnly>
         <NavItem>Home</NavItem>
         <NavItem>About</NavItem>
         <NavItem>Contact</NavItem>
-    </Nav>,
+        <NavItem>Portfolio</NavItem>
+        <NavItem>Careers</NavItem>
+    </LastChildOnly>,
     document.getElementById('root')
     );
