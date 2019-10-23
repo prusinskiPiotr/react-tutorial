@@ -62,16 +62,40 @@ function LastChildOnly({ children }) {
     )
 }
 
+function Head({children, number}){
+    const totalChildren = React.Children.count(children)
+    return(
+        <div>
+            {React.Children.map(children, (child, i) => {
+                if (i > totalChildren - number) return
+                return child
+            })}
+        </div>
+    )
+}
+
+function Tail({children, number}){
+    const totalChildren = React.Children.count(children)
+    return(
+        <div>
+            {React.Children.map(children, (child, i) => {
+                if (i < totalChildren - number) return
+                return child
+            })}
+        </div>
+    )
+}
+
 ReactDOM.render(
     // <ErrorBox>
     //     Something has gone wrong
     // </ErrorBox>,
-    <LastChildOnly>
+    <Tail number={3}>
         <NavItem>Home</NavItem>
         <NavItem>About</NavItem>
         <NavItem>Contact</NavItem>
         <NavItem>Portfolio</NavItem>
         <NavItem>Careers</NavItem>
-    </LastChildOnly>,
+    </Tail>,
     document.getElementById('root')
     );
