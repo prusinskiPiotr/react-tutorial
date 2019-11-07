@@ -6,7 +6,7 @@
   background-color: #f8d7da;
   border-color: #f5c6cb;
   color: #721c24;
-
+  from 'react' import React-dom
   position: relative;
   padding: .75rem 1.25rem;
   margin-bottom: 1rem;
