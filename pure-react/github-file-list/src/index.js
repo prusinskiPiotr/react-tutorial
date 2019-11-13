@@ -19,16 +19,6 @@ FileList.propTypes = {
     files: PropTypes.array
 };
 
-const FileListItem = ({ file }) => (
-    <tr className="file-list-item">
-        <FileName file={file}/>
-    </tr>
-);
-
-FileListItem.propTypes = {
-    file: PropTypes.object.isRequired
-};
-
 function FileIcon({ file }) {
     let icon = 'fa-file-text-o';
     if (file.type === 'folder') {
@@ -56,6 +46,27 @@ const FileName = ({ file }) => {
 
 FileName.propTypes = {
     file: PropTypes.object.isRequired
+};
+
+const FileListItem = ({ file }) => (
+    <tr className="file-list-item">
+        <FileName file={file}/>
+        <CommitMessage commit={file.latestCommit} />
+    </tr>
+);
+
+FileListItem.propTypes = {
+    file: PropTypes.object.isRequired
+};
+
+const CommitMessage = ({ commit }) => (
+    <td className="commit-message">
+        {commit.message}
+    </td>
+);
+
+CommitMessage.propTypes = {
+    commit: PropTypes.object.isRequired
 };
 
 const testFiles = [
