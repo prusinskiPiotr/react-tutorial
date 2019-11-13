@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import Time from './Time';
 import './index.css';
 
 
@@ -8,7 +9,6 @@ const FileList = ({ files }) => (
     <table className="file-list">
         <tbody>
             {files.map(file => 
-                // now we use FileListItem here
                 <FileListItem key={file.id} file={file}/>
             )}
         </tbody>
@@ -52,6 +52,9 @@ const FileListItem = ({ file }) => (
     <tr className="file-list-item">
         <FileName file={file}/>
         <CommitMessage commit={file.latestCommit} />
+        <td className="age">
+            <Time time={file.updated_at}/>
+        </td>
     </tr>
 );
 
@@ -74,7 +77,7 @@ const testFiles = [
         id: 1,
         name: 'src',
         type: 'folder',
-        updated_at: '2016-07-11 21:24:00',
+        updated_at: '2019-11-11 21:24:00',
         latestCommit: {
             message: 'Initial commit'
         }
@@ -83,7 +86,7 @@ const testFiles = [
         id: 2,
         name: 'tests',
         type: 'folder',
-        updated_at: '2016-07-11 21:24:00',
+        updated_at: '2019-11-11 21:24:00',
         latestCommit: {
             message: 'Initial commit'
         }
@@ -92,7 +95,7 @@ const testFiles = [
         id: 3,
         name: 'README',
         type: 'file',
-        updated_at: '2016-07-18 21:24:00',
+        updated_at: '2019-11-13 13:24:00',
         latestCommit: {
             message: 'Added a readme'
         }
