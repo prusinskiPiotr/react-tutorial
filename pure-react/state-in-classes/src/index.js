@@ -16,13 +16,19 @@ class CountingParent extends React.Component{
         // 'this' binding isn't lost when it gets lassed
         // to the button
         this.handleAction = this.handleAction.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
 
-    handleAction(action) {
-        console.log('Child says', action);
+    handleAction() {
         // Replace actionCount with an incremented value
         this.setState({
             actionCount: this.state.actionCount + 1
+        });
+    }
+
+    handleReset(){
+        this.setState({
+            actionCount: 0
         });
     }
 
@@ -30,12 +36,20 @@ class CountingParent extends React.Component{
         return (
             <div>
                 <Child onAction={this.handleAction}/>
+                <Reset onAction={this.handleReset}/>
                 <p>Clicked {this.state.actionCount} times</p>
             </div>
         );
     }
 }
 
+function Reset({ onAction }){
+    return(
+        <button onClick={onAction}>
+            Reset button
+        </button>
+    )
+}
 
 function Child({ onAction }) {
     return (
@@ -45,4 +59,10 @@ function Child({ onAction }) {
     );
 }
 
-ReactDOM.render(<CountingParent />, document.getElementById('root'));
+const Page = () => (
+    <div>
+        <CountingParent/>
+    </div>
+)
+
+ReactDOM.render(<Page />, document.getElementById('root'));
