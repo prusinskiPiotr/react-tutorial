@@ -61,8 +61,43 @@ function Child({ onAction }) {
 
 const Page = () => (
     <div>
-        <CountingParent/>
+        <CountingParent2/>
     </div>
 )
+
+class CountingParent2 extends React.Component {
+    // initialize state with a property initializer
+    // you can access this.props id needed
+    state = {
+        actionCount: 0
+    };
+
+    // writing the handler as an arrow function
+    // means it will retain the proper value of 
+    // 'this', so we can avoid having to bind it
+    handleAction = (action) => {
+        console.log('Child says', action);
+        // Replace actionCount with an incremented value
+        this.setState({
+            actionCount : this .state.actionCount + 1
+        });
+    }
+    
+    handleReset = (action) => {
+        this.setState({
+            actionCount: 0
+        });
+    }
+
+    render(){
+        return(
+            <div>
+                <Child onAction={this.handleAction}/>
+                <Reset onAction={this.handleReset}/>
+                <p>Clicked {this.state.actionCount}</p>
+            </div>
+        )
+    }
+}
 
 ReactDOM.render(<Page />, document.getElementById('root'));
